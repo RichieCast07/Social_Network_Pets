@@ -1,16 +1,17 @@
-const http = require('http');
-const app = require('./app');
-const {connection} = require('./models');
+const http = require("http");
+const app = require("./app");
+const { connection } = require("./models");
 
 const PORT = 3000;
-connection.sync() // Sincroniza los modelos con la base de datos
+connection
+  .sync()
   .then(() => {
-    console.log('Conexión con la base de datos exitosa y modelos sincronizados.');
+    console.log("Connection to database successful and models synchronized.");
     const server = http.createServer(app);
     server.listen(PORT, () => {
-      console.log(`Servidor corriendo en el puerto ${PORT}`);
+      console.log(`Server running on port ${PORT}`);
     });
   })
   .catch((error) => {
-    console.error('Error al sincronizar con la base de datos:', error);
+    console.error("Error synchronizing with database:", error);
   });
